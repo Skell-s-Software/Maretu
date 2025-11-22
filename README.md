@@ -1,6 +1,6 @@
 # Skell's Maretu
 
-![Static Badge](https://badgers.space/badge/Python/+3.13/blue)
+![Static Badge](https://badgers.space/badge/Python/+3.14/blue)
 ![Static Badge](https://badgers.space/badge/Library/DJango/darkgreen)
 ![Static Badge](https://badgers.space/badge/DataBase/MariaDB/green)
 ![Static Badge](https://badgers.space/badge/License/MIT/orange)
