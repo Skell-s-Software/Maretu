@@ -1,5 +1,4 @@
 # Repositorio Local de Skellent
-
 ```mermaid
 gitGraph 
     commit id: "Archivos iniciales"
@@ -16,11 +15,14 @@ gitGraph
    switch website
    commit id: "README"
    switch main
+   commit id: "DJango Requirements"
    commit id: "DJango Archivos Iniciales"
+   switch docs
+   commit id: "Actualizando Docs"
+   switch main
+   merge docs
 ```
-
 # Lista de Tareas de Skellent
-
 ```mermaid
 ---
 config:
@@ -30,8 +32,15 @@ config:
 kanban
   [Por Hacer]
     [Diagrama de Clases]
+    [Planificar Estructura]
+    [Crear Variables de Entorno]
+    [Configurar con MariaDB]
+    [Diseño de Páginas]
+    [Logotipo & Icono]
+    [Planificacion de Aplicaciones]
   [En Progreso]
-    [Documento de Skell]
+    [Documentos de Skell]
+    [Aprendiendo DJango]
   [Listo para Despliegue]
   [Listo para Pruebas]
   [Completado]
@@ -39,9 +48,7 @@ kanban
     [Documentacion Inicial]
   [No Realizable]
     [Pruebas en Windows]
-
 ```
-
 # Linea de Tiempo de Skellent
 ```mermaid
 gantt
