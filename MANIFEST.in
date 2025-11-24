@@ -1,0 +1,3 @@
+# Include the .env file in source distributions (OPTIONAL)
+# Warning: including .env will bundle secrets into the distribution.
+include .env
