@@ -1,0 +1,5 @@
+# Exclusion de entornos virtuales
+server/.venv
+app/.venv
+app/storage
+app/build
