@@ -1,7 +1,7 @@
 [project]
-name = "Maretu-s-Client"
+name = "maretu-client"
 version = "0.1.0"
-description = "Cliente de Servidor Maretu"
+description = "App Client para Skell's Maretu"
 readme = "README.md"
 requires-python = ">=3.9"
 authors = [
@@ -9,7 +9,8 @@ authors = [
 ]
 dependencies = [
   "flet==0.28.3",
-  "requests==2.32.5"
+  "requests>=2.32.5",
+  "rich>=14.2.0",
 ]
 
 [tool.flet]
@@ -22,10 +23,10 @@ org = "com.skellent"
 product = "Skell's Maretu"
 
 # company name to display in about app dialogs
-company = "Skellent"
+company = "Skell's Software"
 
 # copyright text to display in about app dialogs
-copyright = "Copyright (C) 2025 by Skellent"
+copyright = "Copyright (C) 2025 by Skell's Software"
 
 [tool.flet.app]
 path = "src"

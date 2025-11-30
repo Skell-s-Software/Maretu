@@ -1,0 +1,16 @@
+{
+    "workbench.iconTheme": "material-icon-theme",
+    "material-icon-theme.folders.theme": "specific",
+    "material-icon-theme.folders.associations": {
+        "Maretu Client": "app",
+        "Maretu Server": "server",
+        "rest": "public",
+        "querys": "database"
+    },
+    "material-icon-theme.rootFolders.associations": {
+        "Maretu Client": "app",
+        "Maretu Server": "server",
+        "rest": "public",
+        "querys": "database"
+    }
+}

@@ -1,4 +1,4 @@
-# App app
+# MaretuClient app
 
 ## Run the app
 

@@ -1,0 +1,12 @@
+[project]
+name = "maretu-server"
+version = "0.1.0"
+description = "Maretu's BackEnd"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "dotenv>=0.9.9",
+    "flask>=3.1.2",
+    "mariadb>=1.1.14",
+    "rich>=14.2.0",
+]
