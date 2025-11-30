@@ -7,3 +7,4 @@ Maretu Server/.env
 
 # Otras exclusiones
 backup
+Maretu Server/modules/__pycache__

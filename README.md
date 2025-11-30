@@ -26,6 +26,8 @@ Aunque también se planea la posibilidad de hacer una versión dedicada para uso
 
 La respuesta es simple, comodidad pero sobre todo, control. Al desarrollar en Streamlit o DJango había que estar sujetos a cómo trabajaban dichas librerías y a su filosofía de diseño, mientras que con Flet tenemos control sobre casi todo, incluso en el diseño y Querys a la base.
 
+Otro factor importante fue la gestión propia del BackEnd, tanto Streamlit y DJango operaban autonomamente su BackEnd, así que para poder manejarlo mejor y de forma más apropiada se decidio trabajar de forma separada el Servidor.
+
 ```mermaid
 ---
 title: "Comparativa Estimada  ADO VS Maretu"
