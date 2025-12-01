@@ -19,7 +19,7 @@ credenciales: dict = {
 maretuDB: MaretuDB = MaretuDB(credenciales)
 
 # Lector de Consultas Predefinidas
-maretuSQL: MaretuSQL = MaretuSQL()
+maretuSQL: MaretuSQL = MaretuSQL("querys/")
 
 # Consultas de Prueba
 @maretuServer.route('/test', methods=['POST'])
@@ -47,8 +47,15 @@ def test():
             }), 400
     
     # Consultar Base de Datos
+    diccionario: dict = {
+        "<nombre>": username,
+        "<email>": email
+    }
     maretuDB.Cursor.execute(
-        maretuSQL.ConsultaSQL("querys/DEBUG-LOGIN.sql").replace("<nombre>", username).replace("<email>", email)
+        maretuSQL.RemplazarArgumentos(
+            maretuSQL.ConsultaSQL("DEBUG-LOGIN.sql"),
+            diccionario
+        )
     )
     datos: list[dict[str]] = maretuDB.Cursor.fetchall()
     print(datos)
@@ -58,8 +65,7 @@ def test():
     return jsonify({
         "success": True,
         "status": 200,
-        "message": "Usuario encontrado",
-        "data": datos
+        "message": "Ingreso Exitoso"
     }), 200
 
 # Asegurar Conexion

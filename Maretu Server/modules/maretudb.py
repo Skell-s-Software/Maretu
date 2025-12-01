@@ -5,27 +5,35 @@ from dotenv import load_dotenv as LoadEnv
 from rich import print
 
 class MaretuSQL:
-    def ConsultaSQL(instancia, rutaArchivo: str):
+    # Remplazar Argumentos
+    def RemplazarArgumentos(instancia, texto:str, diccionario: dict) -> str:
+        nuevoTexto: str = texto
+        for llave in diccionario:
+            nuevoTexto = nuevoTexto.replace(llave, diccionario[llave])
+        return nuevoTexto
+
+    # Consultar Archivos SQL y retornar texto str
+    def ConsultaSQL(instancia, nombreArchivo: str) -> str:
         try:
-            with open(rutaArchivo, 'rb') as archivo:
+            with open(instancia.RutaCarpeta + nombreArchivo, 'rb') as archivo:
                 archivoBytes = archivo.read()
             return archivoBytes.decode('utf-8')
         except FileNotFoundError:
-            raise FileNotFoundError(f"Error: El archivo no fue encontrado en la ruta: {rutaArchivo}")
+            raise FileNotFoundError(f"Error: El archivo no fue encontrado en la ruta: {nombreArchivo}")
         except IOError as e:
-            raise IOError(f"Error de E/S al leer el archivo '{rutaArchivo}': {e}")
+            raise IOError(f"Error de E/S al leer el archivo '{nombreArchivo}': {e}")
         except UnicodeDecodeError:
             return archivoBytes.decode('latin-1', errors='ignore')
         except Exception as e:
-            raise Exception(f"Ocurrió un error inesperado al procesar el archivo '{rutaArchivo}': {e}")
+            raise Exception(f"Ocurrió un error inesperado al procesar el archivo '{nombreArchivo}': {e}")
 
     # Constructor
-    def __init__(instancia):
-        pass
+    def __init__(instancia, rutaCarpeta):
+        instancia.RutaCarpeta: str = rutaCarpeta
 
 class MaretuDB:
     # Crear Conector de forma Manual
-    def CrearConexion(instancia: object, credenciales: dict):
+    def CrearConexion(instancia: object, credenciales: dict) -> mariadb.connect:
         try:
             conexion: mariadb.connect = mariadb.connect(**credenciales)
         except Exception as e:
@@ -33,7 +41,7 @@ class MaretuDB:
         return conexion
 
     # Crear Cursor de forma Manual
-    def CrearCursor(instancia: object, conexion: mariadb.connect):
+    def CrearCursor(instancia: object, conexion: mariadb.connect) -> mariadb.Cursor:
         try:
             cursor = conexion.cursor(dictionary=True)
         except Exception as e:
@@ -61,8 +69,12 @@ if __name__ == "__main__":
     consultor.Cursor.execute("SELECT * FROM debug")
     print(consultor.Cursor.fetchall())
     print("------- Consulta mediante MaretuSQL -------")
-    lector: MaretuSQL = MaretuSQL()
-    print(lector.ConsultaSQL("querys/DEBUG-LOGIN.sql"))
-    consultor.Cursor.execute(lector.ConsultaSQL("querys/DEBUG-LOGIN.sql").replace("<nombre>", "Robert Rodriguez").replace("<email>", "skellent69@gmail.com"))
+    lector: MaretuSQL = MaretuSQL("querys/")
+    diccionario: dict = {
+        "<nombre>": "Robert Rodriguez",
+        "<email>": "skellent69@gmail.com"
+    }
+    print(f"Consulta: {lector.RemplazarArgumentos(lector.ConsultaSQL("DEBUG-LOGIN.sql"), diccionario)}")
+    consultor.Cursor.execute(lector.RemplazarArgumentos(lector.ConsultaSQL("DEBUG-LOGIN.sql"), diccionario))
     print(consultor.Cursor.fetchall())
 

@@ -5,6 +5,12 @@
 
 Módulo diseñado únicamente para la ejecución de consultas SQL a la base de datos correspondiente mediante una clase en python.
 
+### MaretuDB (Clase)
+
+Esta clase está diseñada únicamente para conectarse y realizar consultas a la base de datos, sus funciones pueden ir aumentando progresivamente
+
+En el periodo de desarrollo en el que se escribió este README, el hilo principal mediante la clase MaretuSQL realizan la consulta manualmente sin recurrir a funciones de la clase, usando únicamente el Cursor de la instancia de MariaDB
+
 ```mermaid
 classDiagram
 direction TB
@@ -12,18 +18,22 @@ direction TB
       self.Credenciales: dict
       self.Conexion: MariaDB.Connection
       self.Cursor: self.Conexion.Cursor
-      ConsultaPersonalizada(Query: str) list[dict]
-      AutenticarUsuario(Credenciales: dict) bool
-      ConsultarUsuarios() list[dict]
-      ConsultarUsuario(user: str) list[dict]
     }
 ```
 
-> La clase es propensa a actualizarse con más funciones.
+### MaretuSQL (Clase)
 
-Esta clase permite obtener de forma directa consultas SQL específicas a la base de datos, se implementó el uso de POO para facilitar su manejo en el hilo principal de ejecución.
+Esta clase está diseñada únicamente para leer archivos de consultas predefinidas por el desarrollador para cada caso de uso. En los archivos de consultas con extension `.sql` en la carpeta `Maretu Server/querys` tienen como "parámetro" sustituible etiquetas similares a las de HTML dependiendo del caso, por ejemplo `<usuario>`.
 
-Por defecto, en el código mismo se debe proporcionar las credenciales para el acceso a la base de datos. Otra opción es usar .env pero esto afectará al momento de compilar la aplicación para producción.
+```mermaid
+classDiagram
+direction TB
+    class MaretuSQL {
+      self.RutaDeConsultas: str
+      ConsultaSQL(rutaArchivo: str) list[dict[str]]
+      RemplazarArgumentos(diccionario: dict) str
+    }
+```
 
 ## Secuencia de Ejecución
 
